@@ -1,24 +1,18 @@
 const express = require ("express");
+const { FoodIndex, FoodCreate, FoodUpdate, FoodDelete } = require ("../controllers/foods.controller.js")
 const router = express.Router();
 
+
 //get
-router.get('/', (req, res) => {
-res.send("Get all food items");
-});
+router.get("/", FoodIndex);
 
 //post
-router.post('/', (req, res) => {
-res.send("Prepare a food");
-});
+router.post("/", FoodCreate);
 
 //update
-router.put('/:id', (req, res) => {
-res.send("Add extra spices");
-});
+router.put("/:id", FoodUpdate);
 
 //delete
-router.delete('/:id', (req, res) => {
-res.send("Food is completed");
-});
+router.delete("/:id", FoodDelete);
 
 module.exports=router;
