@@ -5,6 +5,10 @@ const connectDB = require("./lib/db.js");
 const app = express();
 const PORT = 3000;
 
+//data understanding middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+
 // Connect to database
 connectDB();
 
