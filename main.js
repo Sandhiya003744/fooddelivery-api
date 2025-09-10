@@ -1,25 +1,28 @@
-const express = require("express");
-const foodRoutes = require ("./routes/food.route.js");
+const express = require('express');
+const libraryRoutes = require("./routes/library.route.js");
 const connectDB = require("./lib/db.js");
 
 const app = express();
-const PORT=3000;
+const PORT = 3000;
 
-//connect db
+// Connect to database
 connectDB();
 
+// Middleware to parse JSON
+app.use(express.json());
+
+// Base route
 app.get('/', (req, res) => {
-res.json("My first api");
+    res.json("My first API");
 });
 
+// Library routes
+app.use('/library', libraryRoutes);
 
-app.use('/foods', foodRoutes);
-
-
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-}
-);
+});
 
 
 
