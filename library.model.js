@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,   // Book must have a title
+        required: true,   
         trim: true
     },
     author: {

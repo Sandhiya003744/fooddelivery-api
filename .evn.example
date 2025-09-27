@@ -1,1 +1,1 @@
-MONGODB_URL=mongodb+srv://sandhiyarameshkumar122_db_user:GvpdrFAf7oMjKbBs@cluster0.vwhy1o8.mongodb.net/libraryDB?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URL= "mongodb+srv://sandhiyarameshkumar122_db_user:GvpdrFAf7oMjKbBs@cluster0.vwhy1o8.mongodb.net/libraryDB?retryWrites=true&w=majority&appName=Cluster0"
