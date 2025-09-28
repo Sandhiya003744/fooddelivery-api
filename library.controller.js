@@ -1,5 +1,8 @@
 const Library = require("./library.model.js");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+
+const dotenv = require("dotenv");
+dotenv.config();
 
 const LibraryIndex = async (req, res) => {
   try {
@@ -71,23 +74,28 @@ const LibraryFindByTitle = async (req, res) => {
   }
 };
 
-// const LibraryToken = async (req, res) => {
-//     try{
-//     const{id, author}  = req.body
-//     if(!id || !author ) {
-//       return res.status(404).json({ message: "Error" });
-//     }
-//     res.status(500).json({message: "Token"})
-//     } catch (error){
-//         res.status(400).json({ message: "error.message" })
-//     }
-// }
-
-// const token = jwt.sign(
-// {id: user.id, author: user.name},
-// process.env.JWT_SECRET,
-// {expiresIn: '1h'}
-// )
+const LibraryToken = async (req, res) => {
+    try{
+    const{author , title}  = req.body;
+    if(!author|| !title ) {
+      return res.status(404).json({ message: "missing details" });
+    }
+    const user=await Library.findOne({author:author, title:title});
+    if(!user) {
+      return res.status(404).json({message:"User Invalid"})
+    }
+const token = jwt.sign(
+{author: user.author, title: user.title},
+process.env.JWT_SECRET,
+{expiresIn: '1h'}
+) 
+res.status(200).json({message: token})
+}
+catch (error){
+        res.status(400).json({ message: "error.message" })
+    }
+  }
+  
 
 module.exports = {
   LibraryIndex,
@@ -95,5 +103,5 @@ module.exports = {
   LibraryUpdate,
   LibraryDelete,
   LibraryFindByTitle,
-  // LibraryToken,
+  LibraryToken,
 };

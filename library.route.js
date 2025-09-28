@@ -10,6 +10,6 @@ router.post("/", LibraryController.LibraryCreate);
 router.put("/:id", LibraryController.LibraryUpdate);
 router.delete("/:id", LibraryController.LibraryDelete);
 router.get("/:title", LibraryController.LibraryFindByTitle);
-// router.get("/token", LibraryController.LibraryToken);
+router.post("/token", LibraryController.LibraryToken);
 
 module.exports = router;
