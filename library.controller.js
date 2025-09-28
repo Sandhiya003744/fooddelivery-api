@@ -1,4 +1,6 @@
 const Library = require("./library.model.js");
+// const jwt = require("jsonwebtoken");
+
 const LibraryIndex = async (req, res) => {
   try {
     const libr = await Library.find();
@@ -7,6 +9,7 @@ const LibraryIndex = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 const LibraryCreate = async (req, res) => {
   console.log(req.body);
 
@@ -35,7 +38,7 @@ const LibraryUpdate = async (req, res) => {
       return res.status(404).json({ message: "Book not found" });
     }
 
-    res.json(updatedBook);
+    res.json(updatedLibrary);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -44,7 +47,7 @@ const LibraryUpdate = async (req, res) => {
 const LibraryDelete = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedLibrary = await Book.findByIdAndDelete(id);
+    const deletedLibrary = await Library.findByIdAndDelete(id);
 
     if (!deletedLibrary) {
       return res.status(404).json({ message: "Book not found" });
@@ -64,9 +67,27 @@ const LibraryFindByTitle = async (req, res) => {
     });
     res.send(SearchBookName);
   } catch (error) {
-    res.status(400).json({ message: "error.message" });
+    res.status(400).json({ message: error.message });
   }
 };
+
+// const LibraryToken = async (req, res) => {
+//     try{
+//     const{id, author}  = req.body
+//     if(!id || !author ) {
+//       return res.status(404).json({ message: "Error" });
+//     }
+//     res.status(500).json({message: "Token"})
+//     } catch (error){
+//         res.status(400).json({ message: "error.message" })
+//     }
+// }
+
+// const token = jwt.sign(
+// {id: user.id, author: user.name},
+// process.env.JWT_SECRET,
+// {expiresIn: '1h'}
+// )
 
 module.exports = {
   LibraryIndex,
@@ -74,4 +95,5 @@ module.exports = {
   LibraryUpdate,
   LibraryDelete,
   LibraryFindByTitle,
+  // LibraryToken,
 };
